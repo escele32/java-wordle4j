@@ -36,26 +36,27 @@ public class WordleGame {
     private boolean matchesHint(String guessedWord, String word, String hintedWord) {
         boolean[] usedInWord = new boolean[5];
 
-        for (int i = 0; i < 5; i++) {
-            if (hintedWord.charAt(i) == '+') {
-                if (word.charAt(i) != guessedWord.charAt(i)) {
+        for (int letterIndex = 0; letterIndex < 5; letterIndex++) {
+            if (hintedWord.charAt(letterIndex) == '+') {
+                if (word.charAt(letterIndex) != guessedWord.charAt(letterIndex)) {
                     return false;
                 }
-            } else if (hintedWord.charAt(i) == '^') {
+            } else if (hintedWord.charAt(letterIndex) == '^') {
                 boolean found = false;
-                for (int j = 0; j < 5; j++) {
-                    if (!usedInWord[j] && word.charAt(j) == guessedWord.charAt(i) && j != i) {
+                for (int answerLetterIndex = 0; answerLetterIndex < 5; answerLetterIndex++) {
+                    if (!usedInWord[answerLetterIndex] && word.charAt(answerLetterIndex)
+                            == guessedWord.charAt(letterIndex) && answerLetterIndex != letterIndex) {
                         found = true;
-                        usedInWord[j] = true;
+                        usedInWord[answerLetterIndex] = true;
                         break;
                     }
                 }
                 if (!found) {
                     return false;
                 }
-            } else if (hintedWord.charAt(i) == '-') {
-                for (int j = 0; j < 5; j++) {
-                    if (word.charAt(j) == guessedWord.charAt(i)) {
+            } else if (hintedWord.charAt(letterIndex) == '-') {
+                for (int answerLetterIndex = 0; answerLetterIndex < 5; answerLetterIndex++) {
+                    if (word.charAt(answerLetterIndex) == guessedWord.charAt(letterIndex)) {
                         return false;
                     }
                 }
@@ -87,15 +88,15 @@ public class WordleGame {
         }
 
         //проверка букв на правильных позициях
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < listWordsHistory.size(); j++) {
-                String wordHistory = listWordsHistory.get(j);
-                String hintHistiry = listHintsHistory.get(j);
-                char guessedChar = wordHistory.charAt(i);
-                char hintChar = hintHistiry.charAt(i);
-                if (hintChar == '+' && word.charAt(i) != guessedChar) {
+        for (int currentIndex = 0; currentIndex < 5; currentIndex++) {
+            for (int historyIndex = 0; historyIndex < listWordsHistory.size(); historyIndex++) {
+                String wordHistory = listWordsHistory.get(historyIndex);
+                String hintHistiry = listHintsHistory.get(historyIndex);
+                char guessedChar = wordHistory.charAt(currentIndex);
+                char hintChar = hintHistiry.charAt(currentIndex);
+                if (hintChar == '+' && word.charAt(currentIndex) != guessedChar) {
                     return false;
-                } else if (hintChar == '^' && (word.charAt(i) == guessedChar
+                } else if (hintChar == '^' && (word.charAt(currentIndex) == guessedChar
                         || !word.contains(Character.toString(guessedChar)))) {
                     return false;
                 }
@@ -176,12 +177,12 @@ public class WordleGame {
         Map<Character, String> letterStatuses = new LinkedHashMap<>();
 
         //анализ истории
-        for (int i = 0; i < listWordsHistory.size(); i++) {
-            String word = listWordsHistory.get(i);
-            String hint = listHintsHistory.get(i);
-            for (int j = 0; j < 5; j++) {
-                char charWord = word.charAt(j);
-                char charHint = hint.charAt(j);
+        for (int historyIndex = 0; historyIndex < listWordsHistory.size(); historyIndex++) {
+            String word = listWordsHistory.get(historyIndex);
+            String hint = listHintsHistory.get(historyIndex);
+            for (int letterIndex = 0; letterIndex < 5; letterIndex++) {
+                char charWord = word.charAt(letterIndex);
+                char charHint = hint.charAt(letterIndex);
                 if (charHint == '+') {
                     letterStatuses.put(charWord, "+");
                 } else if (charHint == '^') {

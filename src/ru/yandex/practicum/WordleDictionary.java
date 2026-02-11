@@ -31,23 +31,24 @@ public class WordleDictionary {
         boolean[] usedInAnswer = new boolean[5];
 
         //проверка букв на правильные позиции и отсутствующих букв
-        for (int i = 0; i < answerWord.length(); i++) {
-            if (guessedWord.charAt(i) == answerWord.charAt(i)) {
-                hintedWord.setCharAt(i, '+');
-                usedInAnswer[i] = true;
+        for (int letterIndex = 0; letterIndex < answerWord.length(); letterIndex++) {
+            if (guessedWord.charAt(letterIndex) == answerWord.charAt(letterIndex)) {
+                hintedWord.setCharAt(letterIndex, '+');
+                usedInAnswer[letterIndex] = true;
             } else {
-                hintedWord.setCharAt(i,'-');
-                usedInAnswer[i] = false;
+                hintedWord.setCharAt(letterIndex,'-');
+                usedInAnswer[letterIndex] = false;
             }
         }
 
         //проверка наличия буквы в слове, но не на своих местах
-        for (int i = 0; i < answerWord.length(); i++) {
-            if (hintedWord.charAt(i) != '+') {
-                for (int j = 0; j < answerWord.length(); j++) {
-                    if (!usedInAnswer[j] && guessedWord.charAt(i) == answerWord.charAt(j)) {
-                        hintedWord.setCharAt(i, '^');
-                        usedInAnswer[j] = true;
+        for (int letterIndex = 0; letterIndex < answerWord.length(); letterIndex++) {
+            if (hintedWord.charAt(letterIndex) != '+') {
+                for (int answerLetterIndex = 0; answerLetterIndex < answerWord.length(); answerLetterIndex++) {
+                    if (!usedInAnswer[answerLetterIndex] && guessedWord.charAt(letterIndex)
+                            == answerWord.charAt(answerLetterIndex)) {
+                        hintedWord.setCharAt(letterIndex, '^');
+                        usedInAnswer[answerLetterIndex] = true;
                         break;
                     }
                 }
