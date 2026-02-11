@@ -147,9 +147,9 @@ public class WordleGame {
     }
 
     public List<String> getListPossibleWords() {
-        return  new ArrayList<>(dictionary.getListWords());
+        return new ArrayList<>(dictionary.getListWords());
     }
-    
+
     public String makeGuess(String guessedWord) throws WordNotFoundInDictionaryException, InvalidWordFormatException {
         guessedWord = guessedWord.toLowerCase();
 
