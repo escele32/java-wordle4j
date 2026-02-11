@@ -17,7 +17,7 @@ import java.util.List;
 public class WordleDictionaryLoader {
 
     //метод для выборки соответствующих слов из файла
-    public static WordleDictionary readWordsFromFile(String filename) throws IOException{
+    public static WordleDictionary readWordsFromFile(String filename) throws IOException {
         List<String> words = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename, StandardCharsets.UTF_8))) {
             String list;
