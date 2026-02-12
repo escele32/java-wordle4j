@@ -28,7 +28,7 @@ public class Wordle {
                 StandardCharsets.UTF_8, true))) {
 
             WordleDictionary dictionary = WordleDictionaryLoader.readWordsFromFile(fileName);
-            System.out.println("Общее количество слов: " + dictionary.getListWords().size());
+            System.out.printf("Общее количество слов: %d\n", dictionary.getListWords().size());
             log.printf("Словарь успешно загружен, слов: %d\n", dictionary.getListWords().size());
 
             Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
@@ -69,7 +69,7 @@ public class Wordle {
             }
 
             if (!isHasWin) {
-                System.out.printf("К сожалению, попытки закончились. Загаданное слово было: %s", game.getAnswer());
+                System.out.printf("К сожалению, попытки закончились. Загаданное слово было: %s\n", game.getAnswer());
                 log.printf("Игра завершена. Загаданное слово: %s\n", game.getAnswer());
             }
             scanner.close();

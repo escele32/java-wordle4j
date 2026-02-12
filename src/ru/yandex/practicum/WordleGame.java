@@ -158,7 +158,7 @@ public class WordleGame {
             throw new InvalidWordFormatException("Слово должно состоять из 5 букв");
         }
         if (!dictionary.getListWords().contains(guessedWord)) {
-            throw new WordNotFoundInDictionaryException("Слово не найдено в словаре");
+            throw new WordNotFoundInDictionaryException(String.format("Слово: %s - не найдено в словаре", guessedWord));
         }
 
         String hintedWord = dictionary.getHint(guessedWord, getAnswer());
